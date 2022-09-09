@@ -12,7 +12,7 @@ func GetData(e *colly.XMLElement) {
 	fmt.Println(e.ChildText("yt:videoId"))
 }
 
-func RunScrape() {
+func RunScrape(channel_id string) {
 	c := colly.NewCollector()
 
 	c.OnRequest(func(r *colly.Request) {
@@ -21,6 +21,6 @@ func RunScrape() {
 
 	c.OnXML("//feed/entry", GetData)
 	// c.OnXML("entry", GetData)
-	c.Visit("https://www.youtube.com/feeds/videos.xml?channel_id=UCgA2jKRkqpY_8eysPUs8sjw")
+	c.Visit("https://www.youtube.com/feeds/videos.xml?channel_id=" + channel_id)
 
 }
