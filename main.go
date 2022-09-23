@@ -18,6 +18,10 @@ func Channels(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, response)
 }
 
+func Initialize() {
+
+}
+
 func main() {
 	fmt.Println("Main started!")
 	scrape.RunScrape()
