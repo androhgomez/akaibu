@@ -4,6 +4,10 @@ import (
 	"fmt"
 	"go-sandbox/scrape"
 	"net/http"
+	"os"
+	"os/signal"
+	"syscall"
+	"time"
 )
 
 func Home(w http.ResponseWriter, r *http.Request) {
@@ -20,5 +24,19 @@ func Channels(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	fmt.Println("Main started!")
-	scrape.RunScrape()
+	ticker := time.NewTicker(5 * time.Second)
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
+	go func() {
+		for {
+			select {
+			case <-ticker.C:
+				scrape.RunScrape()
+			}
+		}
+	}()
+
+	<-quit
+	fmt.Println("Ticker Stopped")
+	ticker.Stop()
 }
