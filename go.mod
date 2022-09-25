@@ -1,4 +1,4 @@
-module go-sandbox
+module akaibu
 
 go 1.18
 

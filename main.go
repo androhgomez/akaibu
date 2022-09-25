@@ -1,8 +1,8 @@
 package main
 
 import (
+	"akaibu/scrape"
 	"fmt"
-	"go-sandbox/scrape"
 	"net/http"
 	"os"
 	"os/signal"
